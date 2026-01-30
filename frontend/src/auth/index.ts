@@ -1,4 +1,5 @@
 import { hashNonce } from '@/auth/wallet/client-helpers';
+import { buildBackendUrl } from '@/lib/backend';
 import {
   MiniAppWalletAuthSuccessPayload,
   MiniKit,
@@ -64,6 +65,22 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         }
         // Optionally, fetch the user info from your own database
         const userInfo = await MiniKit.getUserInfo(finalPayload.address);
+
+        try {
+          await fetch(buildBackendUrl('/api/users'), {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              walletAddress: finalPayload.address,
+              username: userInfo.username,
+            }),
+            cache: 'no-store',
+          });
+        } catch (error) {
+          console.error('Failed to sync user to backend', error);
+        }
 
         return {
           id: finalPayload.address,
