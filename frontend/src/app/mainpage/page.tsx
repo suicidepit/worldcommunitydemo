@@ -3,6 +3,8 @@ import { Page } from '@/components/PageLayout';
 import { PostSection } from '@/components/PostSection';
 import { fetchPosts, filterPostsByTheme, type PostSummary } from '@/lib/posts';
 
+export const dynamic = 'force-dynamic';
+
 const loadVisiblePosts = async (): Promise<PostSummary[]> => {
   try {
     const posts = await fetchPosts();
