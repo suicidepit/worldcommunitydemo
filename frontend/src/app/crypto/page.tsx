@@ -45,7 +45,7 @@ export default async function CryptoPage() {
             </div>
             <div className="flex flex-col sm:flex-row gap-3">
               <Link
-                href="/"
+                href="/mainpage"
                 className="inline-flex items-center justify-center rounded-full border border-white/20 px-6 py-3 text-sm font-semibold uppercase tracking-[0.3em] text-white hover:bg-white/10"
               >
                 ← Random category
